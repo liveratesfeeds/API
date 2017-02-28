@@ -81,7 +81,7 @@ As for the moment, Live Rates Feeds supports the following FIX messages only.
   <aside class="warning"><b>A <i>Reject(3)</i> message.</b></aside>
 </aside>
 
-## Logon(A)
+## Logon(==A)
 
 >To connect use this code:
 
@@ -107,7 +107,7 @@ Name | Number | Optional? | Values | Meaning
   A connection established message wil be sent back uppon a successful connection.
 </aside>
 
-## New Order Single(D)
+## New Order Single(==D)
 
 ```java
 final static private SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd-HH:mm:ss");
@@ -160,7 +160,7 @@ Name | Number | Values | Meaning
 **TradeDate** | 75 | date string | 
 **TransactTime** | 60 | time string | 
 
-## OrderCancelRequest(F)
+## OrderCancelRequest(==F)
 
 ```java
 final static private SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd-HH:mm:ss");
@@ -209,7 +209,7 @@ Name | Number | Values | Meaning
 **TradeDate** | 75 | date string | 
 **TransactTime** | 60 | time string |
 
-## OrderCancelReplaceRequest(G)
+## OrderCancelReplaceRequest(==G)
 
 ```java
 final static private SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd-HH:mm:ss");
@@ -260,7 +260,7 @@ Name | Number | Values | Meaning
 **TradeDate** | 75 | date string | 
 **TransactTime** | 60 | time string |
 
-## QuoteRequest(R)
+## QuoteRequest(==R)
 
 ```java
 Message quoteRequest = Message.create(MsgType.QuoteRequest, Version.FIX44);

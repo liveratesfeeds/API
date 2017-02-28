@@ -234,7 +234,7 @@ Use your FIX protocol engine to communicate with Live Rates Feeds system!</p>
 
 <p>This API documentation was created with <a href="https://github.com/tripit/slate">Slate</a>.</p>
 
-<p>In any question, please feel free to contact our support in <a href="tech@liveratesfeeds.com">LRF support</a>.</p>
+<p>In any question, please feel free to contact our support in <code class="prettyprint">tech@liveratesfeeds.com</code>.</p>
 
 <aside class="notice">
 In all examples below we are using <i>Onixs.biz</i> FIX engine and <i>Java</i> programming langauge but of course you can use your own FIX engine and langauge.
@@ -280,11 +280,6 @@ To understand how to do the same as in our examples please contact your FIX engi
 
 <h1 id="authentication">Authentication</h1>
 
-<p>Live Rates Feeds uses SSL encryption and username &amp; password credentials to allow access to the API.</p>
-
-<p>The SSL certificate will be given by us.
-Username &amp; password will be generated automatically for you once you open an account.</p>
-
 <blockquote>
 <p>To authorize, use this code:</p>
 </blockquote>
@@ -298,6 +293,11 @@ Username &amp; password will be generated automatically for you once you open an
 <span class="o">}</span> 
 <span class="n">initiator</span><span class="o">.</span><span class="na">logonAsInitiator</span><span class="o">(&lt;</span><span class="n">LRF</span> <span class="n">host</span><span class="o">,</span> <span class="n">LRF</span> <span class="n">port</span><span class="o">&gt;);</span>
 </code></pre>
+<p>Live Rates Feeds uses SSL encryption and username &amp; password credentials to allow access to the API.</p>
+
+<p>The SSL certificate will be given by us.
+Username &amp; password will be generated automatically for you once you open an account.</p>
+
 <h1 id="fix-messages">FIX Messages</h1>
 
 <p>As for the moment, Live Rates Feeds supports the following FIX messages only.</p>
@@ -317,8 +317,16 @@ Username &amp; password will be generated automatically for you once you open an
   <aside class="warning"><b>A <i>Reject(3)</i> message.</b></aside>
 </aside>
 
-<h2 id="logon-a">Logon(A)</h2>
+<h2 id="logon-a">Logon(==A)</h2>
 
+<blockquote>
+<p>To connect use this code:</p>
+</blockquote>
+<pre class="highlight java tab-java"><code><span class="kd">final</span> <span class="n">Message</span> <span class="n">customLogonMsg</span> <span class="o">=</span> <span class="n">Message</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">MsgType</span><span class="o">.</span><span class="na">Logon</span><span class="o">,</span> <span class="n">Version</span><span class="o">.</span><span class="na">FIX44</span><span class="o">);</span> 
+<span class="n">customLogonMsg</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">Tag</span><span class="o">.</span><span class="na">Username</span><span class="o">,</span> <span class="o">&lt;</span><span class="n">Your</span> <span class="n">username</span><span class="o">&gt;);</span>
+<span class="n">customLogonMsg</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">Tag</span><span class="o">.</span><span class="na">Password</span><span class="o">,</span> <span class="o">&lt;</span><span class="n">Your</span> <span class="n">password</span><span class="o">&gt;);</span> 
+<span class="n">initiator</span><span class="o">.</span><span class="na">logonAsInitiator</span><span class="o">(&lt;</span><span class="n">LRF</span> <span class="n">host</span><span class="o">&gt;,</span> <span class="o">&lt;</span><span class="n">LRF</span> <span class="n">port</span><span class="o">&gt;,</span> <span class="o">&lt;</span><span class="n">HeartBtInt</span><span class="o">&gt;,</span> <span class="n">customLogonMsg</span><span class="o">);</span>
+</code></pre>
 <p>Use this message to Logon to Live Rates Feeds market. </p>
 
 <h3 id="message-request-tags">Message request Tags:</h3>
@@ -362,20 +370,25 @@ Username &amp; password will be generated automatically for you once you open an
 </tr>
 </tbody></table>
 
-<blockquote>
-<p>To connect use this code:</p>
-</blockquote>
-<pre class="highlight java tab-java"><code><span class="kd">final</span> <span class="n">Message</span> <span class="n">customLogonMsg</span> <span class="o">=</span> <span class="n">Message</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">MsgType</span><span class="o">.</span><span class="na">Logon</span><span class="o">,</span> <span class="n">Version</span><span class="o">.</span><span class="na">FIX44</span><span class="o">);</span> 
-<span class="n">customLogonMsg</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">Tag</span><span class="o">.</span><span class="na">Username</span><span class="o">,</span> <span class="o">&lt;</span><span class="n">Your</span> <span class="n">username</span><span class="o">&gt;);</span>
-<span class="n">customLogonMsg</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">Tag</span><span class="o">.</span><span class="na">Password</span><span class="o">,</span> <span class="o">&lt;</span><span class="n">Your</span> <span class="n">password</span><span class="o">&gt;);</span> 
-<span class="n">initiator</span><span class="o">.</span><span class="na">logonAsInitiator</span><span class="o">(&lt;</span><span class="n">LRF</span> <span class="n">host</span><span class="o">&gt;,</span> <span class="o">&lt;</span><span class="n">LRF</span> <span class="n">port</span><span class="o">&gt;,</span> <span class="o">&lt;</span><span class="n">HeartBtInt</span><span class="o">&gt;,</span> <span class="n">customLogonMsg</span><span class="o">);</span>
-</code></pre>
 <aside class="success">
   A connection established message wil be sent back uppon a successful connection.
 </aside>
 
-<h2 id="new-order-single-d">New Order Single(D)</h2>
+<h2 id="new-order-single-d">New Order Single(==D)</h2>
+<pre class="highlight java tab-java"><code><span class="kd">final</span> <span class="kd">static</span> <span class="kd">private</span> <span class="n">SimpleDateFormat</span> <span class="n">sdf</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SimpleDateFormat</span><span class="o">(</span><span class="s">"yyyyMMdd-HH:mm:ss"</span><span class="o">);</span>
 
+<span class="n">Message</span> <span class="n">order</span> <span class="o">=</span> <span class="n">Message</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">MsgType</span><span class="o">.</span><span class="na">NewOrderSingle</span><span class="o">,</span> <span class="n">Version</span><span class="o">.</span><span class="na">FIX44</span><span class="o">);</span>
+
+<span class="n">order</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">Tag</span><span class="o">.</span><span class="na">ClOrdID</span><span class="o">,</span> <span class="s">"1234"</span><span class="o">);</span>
+<span class="n">order</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">Tag</span><span class="o">.</span><span class="na">Symbol</span><span class="o">,</span> <span class="s">"SEC"</span><span class="o">);</span>
+<span class="n">order</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">Tag</span><span class="o">.</span><span class="na">Side</span><span class="o">,</span> <span class="mi">1</span><span class="o">);</span> <span class="c1">//Buy side</span>
+<span class="n">order</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">Tag</span><span class="o">.</span><span class="na">TransactTime</span><span class="o">,</span> <span class="n">sdf</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="k">new</span> <span class="n">Date</span><span class="o">()));</span>
+<span class="n">order</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">Tag</span><span class="o">.</span><span class="na">OrdType</span><span class="o">,</span> <span class="mi">1</span><span class="o">);</span> <span class="c1">// Market</span>
+<span class="n">order</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">Tag</span><span class="o">.</span><span class="na">OrderQty</span><span class="o">,</span> <span class="mi">1000</span><span class="o">);</span>
+<span class="n">order</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">Tag</span><span class="o">.</span><span class="na">AccountType</span><span class="o">,</span> <span class="mi">2</span><span class="o">);</span>
+
+<span class="n">sessin</span><span class="o">.</span><span class="na">send</span><span class="o">(</span><span class="n">order</span><span class="o">);</span>
+</code></pre>
 <p>Use this message to create a new order in the market.</p>
 
 <h3 id="message-request-tags">Message request tags:</h3>
@@ -432,11 +445,498 @@ Username &amp; password will be generated automatically for you once you open an
 <td></td>
 </tr>
 <tr>
-<td>**AccountType</td>
+<td><strong>AccountType</strong></td>
 <td>581</td>
 <td>1 ,2</td>
 <td></td>
 <td></td>
+</tr>
+</tbody></table>
+
+<h3 id="message-response-tags">Message response tags:</h3>
+
+<aside class="success">
+  Remember - on success, an Execution Report(8) is being responed.
+</aside>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Number</th>
+<th>Values</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>OrderID</strong></td>
+<td>37</td>
+<td>Long number</td>
+<td>unique order ID generated by our system</td>
+</tr>
+<tr>
+<td><strong>ExecID</strong></td>
+<td>17</td>
+<td>String ID</td>
+<td>unique execution ID generated by our system</td>
+</tr>
+<tr>
+<td><strong>ExecType</strong></td>
+<td>150</td>
+<td>0, 3</td>
+<td>0 if AccountType = 2, 3 if AccountType = 1</td>
+</tr>
+<tr>
+<td><strong>OrdStatus</strong></td>
+<td>39</td>
+<td>0, 2</td>
+<td>0 if AccountType = 2, 2 if AccountType = 1</td>
+</tr>
+<tr>
+<td><strong>Side</strong></td>
+<td>54</td>
+<td>Same as in the request</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>LastQty</strong></td>
+<td>32</td>
+<td>0, integer number</td>
+<td>0 if AccountType = 2, quantity of last trade if AccountType = 1</td>
+</tr>
+<tr>
+<td><strong>LastPx</strong></td>
+<td>31</td>
+<td>0, float number</td>
+<td>0 if AccountType = 2, price of last trade for 1 unit if AccountType = 1</td>
+</tr>
+<tr>
+<td><strong>LeavesQty</strong></td>
+<td>151</td>
+<td>integer number</td>
+<td>remaining quantity in order to be traded</td>
+</tr>
+<tr>
+<td><strong>CumQty</strong></td>
+<td>14</td>
+<td>integer number</td>
+<td>total quantity already traded</td>
+</tr>
+<tr>
+<td><strong>AvgPx</strong></td>
+<td>6</td>
+<td>0, float number</td>
+<td>0 if AccountType = 2, average price of last trade if AccountType = 1</td>
+</tr>
+<tr>
+<td><strong>TradeDate</strong></td>
+<td>75</td>
+<td>date string</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>TransactTime</strong></td>
+<td>60</td>
+<td>time string</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="ordercancelrequest-f">OrderCancelRequest(==F)</h2>
+<pre class="highlight java tab-java"><code><span class="kd">final</span> <span class="kd">static</span> <span class="kd">private</span> <span class="n">SimpleDateFormat</span> <span class="n">sdf</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SimpleDateFormat</span><span class="o">(</span><span class="s">"yyyyMMdd-HH:mm:ss"</span><span class="o">);</span>
+
+<span class="n">Message</span> <span class="n">cancelOrder</span> <span class="o">=</span> <span class="n">Message</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">MsgType</span><span class="o">.</span><span class="na">OrderCancelRequest</span><span class="o">,</span> <span class="n">Version</span><span class="o">.</span><span class="na">FIX44</span><span class="o">);</span>
+
+<span class="n">cancelOrder</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">Tag</span><span class="o">.</span><span class="na">OrigClOrdID</span><span class="o">,</span> <span class="s">"1234"</span><span class="o">);</span> <span class="c1">//client order id to cancel</span>
+<span class="n">cancelOrder</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">Tag</span><span class="o">.</span><span class="na">ClOrdID</span><span class="o">,</span> <span class="s">"5678"</span><span class="o">);</span>
+<span class="n">cancelOrder</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">Tag</span><span class="o">.</span><span class="na">Symbol</span><span class="o">,</span> <span class="s">"SEC"</span><span class="o">);</span>
+<span class="n">cancelOrder</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">Tag</span><span class="o">.</span><span class="na">Side</span><span class="o">,</span> <span class="mi">1</span><span class="o">);</span>
+<span class="n">cancelOrder</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">Tag</span><span class="o">.</span><span class="na">TransactTime</span><span class="o">,</span> <span class="n">sdf</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="k">new</span> <span class="n">Date</span><span class="o">()));</span>
+
+<span class="n">session</span><span class="o">.</span><span class="na">send</span><span class="o">(</span><span class="n">cancelOrder</span><span class="o">);</span>
+</code></pre>
+<p>Use this message to cancel an existing order in the market.</p>
+
+<h3 id="message-request-tags">Message request tags:</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Number</th>
+<th>Optional?</th>
+<th>Values</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>OrigClordID</strong></td>
+<td>41</td>
+<td>No</td>
+<td></td>
+<td>Client order ID to cancel</td>
+</tr>
+<tr>
+<td><strong>ClordID</strong></td>
+<td>11</td>
+<td>No</td>
+<td></td>
+<td>Unique identifier of the order as assigned by institution or by the intermediary</td>
+</tr>
+<tr>
+<td><strong>Symbol</strong></td>
+<td>55</td>
+<td>No</td>
+<td></td>
+<td>Common, &ldquo;human understood&rdquo; representation of the security</td>
+</tr>
+<tr>
+<td><strong>Side</strong></td>
+<td>54</td>
+<td>No</td>
+<td>1, 2</td>
+<td>must be the same as the order you want to cancel</td>
+</tr>
+<tr>
+<td><strong>TransactTime</strong></td>
+<td>60</td>
+<td>No</td>
+<td></td>
+<td>Time this order request was initiated/released by the trader.</td>
+</tr>
+</tbody></table>
+
+<h3 id="message-response-tags">Message response tags:</h3>
+
+<aside class="success">
+  Remember - on success, an Execution Report(8) is being responed.
+</aside>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Number</th>
+<th>Values</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>OrderID</strong></td>
+<td>37</td>
+<td>Long number</td>
+<td>cancelled order ID</td>
+</tr>
+<tr>
+<td><strong>ExecID</strong></td>
+<td>17</td>
+<td>String ID</td>
+<td>unique execution ID generated by our system</td>
+</tr>
+<tr>
+<td><strong>ExecType</strong></td>
+<td>150</td>
+<td>4</td>
+<td>execution type of cancelled</td>
+</tr>
+<tr>
+<td><strong>OrdStatus</strong></td>
+<td>39</td>
+<td>4</td>
+<td>order status of cancelled</td>
+</tr>
+<tr>
+<td><strong>Side</strong></td>
+<td>54</td>
+<td>Same as in the request</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>LastQty</strong></td>
+<td>32</td>
+<td>0</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>LastPx</strong></td>
+<td>31</td>
+<td>float number</td>
+<td>price of last trade for 1 unit</td>
+</tr>
+<tr>
+<td><strong>LeavesQty</strong></td>
+<td>151</td>
+<td>integer number</td>
+<td>remaining quantity in order to be traded</td>
+</tr>
+<tr>
+<td><strong>CumQty</strong></td>
+<td>14</td>
+<td>integer number</td>
+<td>total quantity already traded</td>
+</tr>
+<tr>
+<td><strong>AvgPx</strong></td>
+<td>6</td>
+<td>float number</td>
+<td>average price of last trade</td>
+</tr>
+<tr>
+<td><strong>TradeDate</strong></td>
+<td>75</td>
+<td>date string</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>TransactTime</strong></td>
+<td>60</td>
+<td>time string</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="ordercancelreplacerequest-g">OrderCancelReplaceRequest(==G)</h2>
+<pre class="highlight java tab-java"><code><span class="kd">final</span> <span class="kd">static</span> <span class="kd">private</span> <span class="n">SimpleDateFormat</span> <span class="n">sdf</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SimpleDateFormat</span><span class="o">(</span><span class="s">"yyyyMMdd-HH:mm:ss"</span><span class="o">);</span>
+
+<span class="n">Message</span> <span class="n">replaceOrder</span> <span class="o">=</span> <span class="n">Message</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">MsgType</span><span class="o">.</span><span class="na">OrderCancelReplaceRequest</span><span class="o">,</span> <span class="n">Version</span><span class="o">.</span><span class="na">FIX44</span><span class="o">);</span>
+
+<span class="n">replaceOrder</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">Tag</span><span class="o">.</span><span class="na">OrigClOrdID</span><span class="o">,</span> <span class="s">"1234"</span><span class="o">);</span> <span class="c1">//client order id to cancel</span>
+<span class="n">replaceOrder</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">Tag</span><span class="o">.</span><span class="na">ClOrdID</span><span class="o">,</span> <span class="s">"0246"</span><span class="o">);</span>
+<span class="n">replaceOrder</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">Tag</span><span class="o">.</span><span class="na">Symbol</span><span class="o">,</span> <span class="s">"SEC"</span><span class="o">);</span>
+<span class="n">replaceOrder</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">Tag</span><span class="o">.</span><span class="na">Side</span><span class="o">,</span> <span class="mi">1</span><span class="o">);</span>
+<span class="n">replaceOrder</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">Tag</span><span class="o">.</span><span class="na">TransactTime</span><span class="o">,</span> <span class="n">sdf</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="k">new</span> <span class="n">Date</span><span class="o">()));</span>
+<span class="n">replaceOrder</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">Tag</span><span class="o">.</span><span class="na">OrderQty</span><span class="o">,</span> <span class="mi">100</span><span class="o">);</span> <span class="c1">//replace quantity</span>
+
+<span class="n">session</span><span class="o">.</span><span class="na">send</span><span class="o">(</span><span class="n">replaceOrder</span><span class="o">)</span>
+</code></pre>
+<p>Use this message to replace an existing order in the market.</p>
+
+<h3 id="message-request-tags">Message request tags:</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Number</th>
+<th>Optional?</th>
+<th>Values</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>OrigClordID</strong></td>
+<td>41</td>
+<td>No</td>
+<td></td>
+<td>Client order ID to cancel</td>
+</tr>
+<tr>
+<td><strong>ClordID</strong></td>
+<td>11</td>
+<td>No</td>
+<td></td>
+<td>Unique identifier of the order as assigned by institution or by the intermediary</td>
+</tr>
+<tr>
+<td><strong>Symbol</strong></td>
+<td>55</td>
+<td>No</td>
+<td></td>
+<td>Common, &ldquo;human understood&rdquo; representation of the security</td>
+</tr>
+<tr>
+<td><strong>Side</strong></td>
+<td>54</td>
+<td>No</td>
+<td>1, 2</td>
+<td>must be the same as the order you want to cancel</td>
+</tr>
+<tr>
+<td><strong>TransactTime</strong></td>
+<td>60</td>
+<td>No</td>
+<td></td>
+<td>Time this order request was initiated/released by the trader</td>
+</tr>
+<tr>
+<td><strong>OrderQty</strong></td>
+<td>38</td>
+<td>No</td>
+<td></td>
+<td>quantity to replace (0 quantity will cancel the order)</td>
+</tr>
+</tbody></table>
+
+<h3 id="message-response-tags">Message response tags:</h3>
+
+<aside class="success">
+  Remember - on success, an Execution Report(8) is being responed.
+</aside>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Number</th>
+<th>Values</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>OrderID</strong></td>
+<td>37</td>
+<td>Long number</td>
+<td>cancelled order ID</td>
+</tr>
+<tr>
+<td><strong>ExecID</strong></td>
+<td>17</td>
+<td>String ID</td>
+<td>unique execution ID generated by our system</td>
+</tr>
+<tr>
+<td><strong>ExecType</strong></td>
+<td>150</td>
+<td>5</td>
+<td>execution type of replaced</td>
+</tr>
+<tr>
+<td><strong>OrdStatus</strong></td>
+<td>39</td>
+<td>0, 1</td>
+<td>same status of order as before the replacement</td>
+</tr>
+<tr>
+<td><strong>Side</strong></td>
+<td>54</td>
+<td>Same as in the request</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>LastQty</strong></td>
+<td>32</td>
+<td>0</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>LastPx</strong></td>
+<td>31</td>
+<td>float number</td>
+<td>price of last trade for 1 unit</td>
+</tr>
+<tr>
+<td><strong>LeavesQty</strong></td>
+<td>151</td>
+<td>integer number</td>
+<td>remaining quantity in order to be traded</td>
+</tr>
+<tr>
+<td><strong>CumQty</strong></td>
+<td>14</td>
+<td>integer number</td>
+<td>total quantity already traded</td>
+</tr>
+<tr>
+<td><strong>AvgPx</strong></td>
+<td>6</td>
+<td>float number</td>
+<td>average price of last trade</td>
+</tr>
+<tr>
+<td><strong>TradeDate</strong></td>
+<td>75</td>
+<td>date string</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>TransactTime</strong></td>
+<td>60</td>
+<td>time string</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="quoterequest-r">QuoteRequest(==R)</h2>
+<pre class="highlight java tab-java"><code><span class="n">Message</span> <span class="n">quoteRequest</span> <span class="o">=</span> <span class="n">Message</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">MsgType</span><span class="o">.</span><span class="na">QuoteRequest</span><span class="o">,</span> <span class="n">Version</span><span class="o">.</span><span class="na">FIX44</span><span class="o">);</span>
+
+<span class="n">quoteRequest</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">Tag</span><span class="o">.</span><span class="na">QuoteReqID</span><span class="o">,</span> <span class="n">gen</span><span class="o">.</span><span class="na">generate</span><span class="o">());</span>
+<span class="kd">final</span> <span class="n">Group</span> <span class="n">groupRelatedSym</span> <span class="o">=</span> <span class="n">message</span><span class="o">.</span><span class="na">setGroup</span><span class="o">(</span><span class="n">Tag</span><span class="o">.</span><span class="na">NoRelatedSym</span><span class="o">,</span> <span class="mi">1</span><span class="o">);</span>
+<span class="n">groupRelatedSym</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">Tag</span><span class="o">.</span><span class="na">Symbol</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="s">"SEC"</span><span class="o">);</span>
+
+<span class="n">session</span><span class="o">.</span><span class="na">send</span><span class="o">(</span><span class="n">replaceOrder</span><span class="o">)</span>
+</code></pre>
+<p>Use this message to request the current prices of a security</p>
+
+<aside class="notice">
+  This request uses FIX group of Symbol(55) to to support multiple security quote requests in one message.
+</aside>
+
+<h3 id="message-request-tags">Message request tags:</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Number</th>
+<th>Optional?</th>
+<th>Values</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>QuoteReqID</strong></td>
+<td>131</td>
+<td>No</td>
+<td></td>
+<td>Unique quote request ID</td>
+</tr>
+<tr>
+<td><strong>NoRelatedSym</strong></td>
+<td>146</td>
+<td>No</td>
+<td>Number of symbols in request</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Symbol</strong></td>
+<td>55</td>
+<td>No</td>
+<td>symbol of security (reapeat this tag NoRelatedSym times!)</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="message-response-tags">Message response tags:</h3>
+
+<aside class="notice">
+  On success, a QuoteResponse(AJ) will be sent back for each symol in the request
+</aside>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Number</th>
+<th>Values</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>QuoteReqID</strong></td>
+<td>131</td>
+<td></td>
+<td>ID of request</td>
+</tr>
+<tr>
+<td><strong>Symbol</strong></td>
+<td>55</td>
+<td></td>
+<td>symbol of request</td>
+</tr>
+<tr>
+<td><strong>BidPx</strong></td>
+<td>132</td>
+<td></td>
+<td>bid price of symbol</td>
+</tr>
+<tr>
+<td>**OfferPx</td>
+<td>133</td>
+<td></td>
+<td>offer price of symbol</td>
 </tr>
 </tbody></table>
 

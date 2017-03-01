@@ -11,36 +11,34 @@ search: true
 # Introduction
 
 Welcome to the Live Rates Feeds FIX API!
-You can use our API to access Live Rates Feeds market and trades our products.
+You can use our API to access Live Rates Feeds price feeds and trade our products.
 
-The Live Rates Feeds API was written in Java using the great FIX engine
-of [Onix.biz](http://www.onixs.biz/).
-Use your FIX protocol engine to communicate with Live Rates Feeds system!
+The Live Rates Feeds API was written in Java using the great FIX engine of [Onix.biz](http://www.onixs.biz/).
+Use your FIX protocol engine to communicate with the Live Rates Feeds system!
 
 This API documentation was created with [Slate](https://github.com/tripit/slate).
 
-In any question, please feel free to contact our support in `tech@liveratesfeeds.com`.
+Please feel free to contact our support with any questions you may have at `tech@liveratesfeeds.com`.
 
 <aside class="notice">
-In all examples below we are using <i>Onixs.biz</i> FIX engine and <i>Java</i> programming langauge but of course you can use your own FIX engine and langauge.
-To understand how to do the same as in our examples please contact your FIX engine provider.
+In all of the examples below we are using the <i>Onixs.biz</i> FIX engine and <i>Java</i> programming language but of course you can use your own FIX engine and language. To understand how to do the same as in our examples please contact your FIX engine provider.
 </aside>
 
 # Configuration
 
-To connect to Live Rates Feeds API you must set your configuration file to have this mandatury values:
+To connect to the Live Rates Feeds API you must set your configuration file to have these mandatory values:
 
 Name | Value
 ---- | -----
 **host** | some host
-**port** | some port 
+**port** | some port
 **Sender Computer ID** | your unique computer ID
 **Target Computer ID** | LRFCP
 **FIX Version** | 4.4
 
 <aside class="warning">
   Live Rates Feeds uses FIX4.4 version for its API messages parsing.
-  Any use of other version will cause the connection to be closed immidiatley.
+  Use of any other version will cause the connection to be closed immediately.
 </aside>
 
 # Authentication
@@ -55,11 +53,11 @@ try {
   initiator.setSSLContext(sslContext);
 } catch (GeneralSecurityException e) {
   // Some actions on failure
-} 
+}
 initiator.logonAsInitiator(<LRF host, LRF port>);
 ```
 
-Live Rates Feeds uses SSL encryption and username & password credentials to allow access to the API.
+Live Rates Feeds uses SSL encryption along with username & password credentials to allow access to the API.
 
 The SSL certificate will be given by us.
 Username & password will be generated automatically for you once you open an account.
@@ -69,8 +67,8 @@ Username & password will be generated automatically for you once you open an acc
 As for the moment, Live Rates Feeds supports the following FIX messages only.
 
 <aside class="notice">
-  Some of the messages will response with other FIX messages.
-  Please notice the <i>response</i> part in each message to understand the response values.
+Some of the messages will respond with other FIX messages.
+Please notice the <i>response</i> part in each message to understand the response values.
 </aside>
 <aside class="notice">
   If no response is being specified then you can assume that there is no special response.
@@ -86,25 +84,25 @@ As for the moment, Live Rates Feeds supports the following FIX messages only.
 >To connect use this code:
 
 ```java
-final Message customLogonMsg = Message.create(MsgType.Logon, Version.FIX44); 
+final Message customLogonMsg = Message.create(MsgType.Logon, Version.FIX44);
 customLogonMsg.set(Tag.Username, <Your username>);
-customLogonMsg.set(Tag.Password, <Your password>); 
+customLogonMsg.set(Tag.Password, <Your password>);
 initiator.logonAsInitiator(<LRF host>, <LRF port>, <HeartBtInt>, customLogonMsg);
 ```
 
-Use this message to Logon to Live Rates Feeds market. 
+Use this message to Logon to Live Rates Feeds market.
 
 ### Message request Tags:
 
 Name | Number | Optional? | Values | Meaning
----- | ------ | --------- | ------ | ------- 
+---- | ------ | --------- | ------ | -------
 **EncryptMethod** | 98 | No | 0 | encryption of the messages
 **HeartBtInt** | 108 | No | 0-100 | interval for heartbeat check
 **Username** | 553 | No | | Account username
 **Password** | 554 | No | | Account password
 
 <aside class="success">
-  A connection established message wil be sent back uppon a successful connection.
+  A connection established message will be sent back upon a successful connection.
 </aside>
 
 ## New Order Single(==D)
@@ -130,23 +128,23 @@ Use this message to create a new order in the market.
 ### Message request tags:
 
 Name | Number | Optional? | Values | Meaning
----- | ------ | --------- | ------ | ------- 
+---- | ------ | --------- | ------ | -------
 **ClOrdID** | 11 | No | |Unique identifier of the order as assigned by institution or by the intermediary
 **Symbol** | 55 | No | see [Securities](#) | Common, "human understood" representation of the security.
-**Side** | 54 | No | 1, 2 | 
+**Side** | 54 | No | 1, 2 |
 **TransactTime** | 60 | No | Time this order request was initiated/released by the trader.
 **OrderQty** | 38 | No | quantity of security units to be traded.
 **OrdType** | 40 | No | 1 |
-**AccountType** | 581 | 1 ,2 | 
+**AccountType** | 581 | 1 ,2 |
 
 ### Message response tags:
 
 <aside class="success">
-  Remember - on success, an Execution Report(8) is being responed.
+  Remember - on success, the response will be an Execution Report(8).
 </aside>
 
 Name | Number | Values | Meaning
----- | ------ | ------ | ------- 
+---- | ------ | ------ | -------
 **OrderID** | 37 | Long number | unique order ID generated by our system
 **ExecID** | 17 | String ID | unique execution ID generated by our system
 **ExecType** | 150 | 0, 3 | 0 if AccountType = 2, 3 if AccountType = 1 | type of execution report
@@ -157,8 +155,8 @@ Name | Number | Values | Meaning
 **LeavesQty** | 151 | integer number | remaining quantity in order to be traded
 **CumQty** | 14 | integer number | total quantity already traded
 **AvgPx** | 6 | 0, float number | 0 if AccountType = 2, average price of last trade if AccountType = 1
-**TradeDate** | 75 | date string | 
-**TransactTime** | 60 | time string | 
+**TradeDate** | 75 | date string |
+**TransactTime** | 60 | time string |
 
 ## OrderCancelRequest(==F)
 
@@ -166,7 +164,7 @@ Name | Number | Values | Meaning
 final static private SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd-HH:mm:ss");
 
 Message cancelOrder = Message.create(MsgType.OrderCancelRequest, Version.FIX44);
-		
+
 cancelOrder.set(Tag.OrigClOrdID, "1234"); //client order id to cancel
 cancelOrder.set(Tag.ClOrdID, "5678");
 cancelOrder.set(Tag.Symbol, "SEC");
@@ -181,7 +179,7 @@ Use this message to cancel an existing order in the market.
 ### Message request tags:
 
 Name | Number | Optional? | Values | Meaning
----- | ------ | --------- | ------ | ------- 
+---- | ------ | --------- | ------ | -------
 **OrigClordID** | 41 | No | | Client order ID to cancel
 **ClordID** | 11 | No | | Unique identifier of the order as assigned by institution or by the intermediary
 **Symbol** | 55 | No | | Common, "human understood" representation of the security
@@ -191,11 +189,11 @@ Name | Number | Optional? | Values | Meaning
 ### Message response tags:
 
 <aside class="success">
-  Remember - on success, an Execution Report(8) is being responed.
+  Remember - on success, the response will be an Execution Report(8).
 </aside>
 
 Name | Number | Values | Meaning
----- | ------ | ------ | ------- 
+---- | ------ | ------ | -------
 **OrderID** | 37 | Long number | cancelled order ID
 **ExecID** | 17 | String ID | unique execution ID generated by our system
 **ExecType** | 150 | 4 | execution type of cancelled
@@ -206,7 +204,7 @@ Name | Number | Values | Meaning
 **LeavesQty** | 151 | integer number | remaining quantity in order to be traded
 **CumQty** | 14 | integer number | total quantity already traded
 **AvgPx** | 6 | float number | average price of last trade
-**TradeDate** | 75 | date string | 
+**TradeDate** | 75 | date string |
 **TransactTime** | 60 | time string |
 
 ## OrderCancelReplaceRequest(==G)
@@ -231,7 +229,7 @@ Use this message to replace an existing order in the market.
 ### Message request tags:
 
 Name | Number | Optional? | Values | Meaning
----- | ------ | --------- | ------ | ------- 
+---- | ------ | --------- | ------ | -------
 **OrigClordID** | 41 | No | | Client order ID to cancel
 **ClordID** | 11 | No | | Unique identifier of the order as assigned by institution or by the intermediary
 **Symbol** | 55 | No | | Common, "human understood" representation of the security
@@ -242,11 +240,11 @@ Name | Number | Optional? | Values | Meaning
 ### Message response tags:
 
 <aside class="success">
-  Remember - on success, an Execution Report(8) is being responed.
+  Remember - on success, the response will be an Execution Report(8).
 </aside>
 
 Name | Number | Values | Meaning
----- | ------ | ------ | ------- 
+---- | ------ | ------ | -------
 **OrderID** | 37 | Long number | cancelled order ID
 **ExecID** | 17 | String ID | unique execution ID generated by our system
 **ExecType** | 150 | 5 | execution type of replaced
@@ -257,7 +255,7 @@ Name | Number | Values | Meaning
 **LeavesQty** | 151 | integer number | remaining quantity in order to be traded
 **CumQty** | 14 | integer number | total quantity already traded
 **AvgPx** | 6 | float number | average price of last trade
-**TradeDate** | 75 | date string | 
+**TradeDate** | 75 | date string |
 **TransactTime** | 60 | time string |
 
 ## QuoteRequest(==R)
@@ -275,13 +273,13 @@ session.send(replaceOrder)
 Use this message to request the current prices of a security
 
 <aside class="notice">
-  This request uses FIX group of Symbol(55) to to support multiple security quote requests in one message.
+  This request uses FIX group of Symbol(55) to support multiple security quote requests in one message.
 </aside>
 
 ### Message request tags:
 
 Name | Number | Optional? | Values | Meaning
----- | ------ | --------- | ------ | ------- 
+---- | ------ | --------- | ------ | -------
 **QuoteReqID** | 131 | No | | Unique quote request ID
 **NoRelatedSym** | 146 | No | Number of symbols in request
 **Symbol** | 55 | No | symbol of security (reapeat this tag NoRelatedSym times!)
@@ -289,7 +287,7 @@ Name | Number | Optional? | Values | Meaning
 ### Message response tags:
 
 <aside class="notice">
-  On success, a QuoteResponse(AJ) will be sent back for each symol in the request
+  On success, a QuoteResponse(AJ) will be sent back for each symbol in the request
 </aside>
 
 Name | Number | Values | Meaning
@@ -302,12 +300,12 @@ Name | Number | Values | Meaning
 ## Reject(3)
 
 <aside class="notice">
-  We use this message to response to FIX messages and wee are not supporting requests with this message.
+  We use this message to respond to FIX messages.  We are not supporting requests with this message.
 </aside>
 
 on failure, we will response a failure reason within this message.
 
-### Message response tags: 
+### Message response tags:
 
 Name | Number | Value
 ---- | ------ | -----

@@ -226,24 +226,22 @@
         <h1 id="introduction">Introduction</h1>
 
 <p>Welcome to the Live Rates Feeds FIX API!
-You can use our API to access Live Rates Feeds market and trades our products.</p>
+You can use our API to access Live Rates Feeds price feeds and trade our products.</p>
 
-<p>The Live Rates Feeds API was written in Java using the great FIX engine
-of <a href="http://www.onixs.biz/">Onix.biz</a>.
-Use your FIX protocol engine to communicate with Live Rates Feeds system!</p>
+<p>The Live Rates Feeds API was written in Java using the great FIX engine of <a href="http://www.onixs.biz/">Onix.biz</a>.
+Use your FIX protocol engine to communicate with the Live Rates Feeds system!</p>
 
 <p>This API documentation was created with <a href="https://github.com/tripit/slate">Slate</a>.</p>
 
-<p>In any question, please feel free to contact our support in <code class="prettyprint">tech@liveratesfeeds.com</code>.</p>
+<p>Please feel free to contact our support with any questions you may have at <code class="prettyprint">tech@liveratesfeeds.com</code>.</p>
 
 <aside class="notice">
-In all examples below we are using <i>Onixs.biz</i> FIX engine and <i>Java</i> programming langauge but of course you can use your own FIX engine and langauge.
-To understand how to do the same as in our examples please contact your FIX engine provider.
+In all of the examples below we are using the <i>Onixs.biz</i> FIX engine and <i>Java</i> programming language but of course you can use your own FIX engine and language. To understand how to do the same as in our examples please contact your FIX engine provider.
 </aside>
 
 <h1 id="configuration">Configuration</h1>
 
-<p>To connect to Live Rates Feeds API you must set your configuration file to have this mandatury values:</p>
+<p>To connect to the Live Rates Feeds API you must set your configuration file to have these mandatory values:</p>
 
 <table><thead>
 <tr>
@@ -275,7 +273,7 @@ To understand how to do the same as in our examples please contact your FIX engi
 
 <aside class="warning">
   Live Rates Feeds uses FIX4.4 version for its API messages parsing.
-  Any use of other version will cause the connection to be closed immidiatley.
+  Use of any other version will cause the connection to be closed immediately.
 </aside>
 
 <h1 id="authentication">Authentication</h1>
@@ -290,10 +288,10 @@ To understand how to do the same as in our examples please contact your FIX engi
   <span class="n">initiator</span><span class="o">.</span><span class="na">setSSLContext</span><span class="o">(</span><span class="n">sslContext</span><span class="o">);</span>
 <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">GeneralSecurityException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
   <span class="c1">// Some actions on failure</span>
-<span class="o">}</span> 
+<span class="o">}</span>
 <span class="n">initiator</span><span class="o">.</span><span class="na">logonAsInitiator</span><span class="o">(&lt;</span><span class="n">LRF</span> <span class="n">host</span><span class="o">,</span> <span class="n">LRF</span> <span class="n">port</span><span class="o">&gt;);</span>
 </code></pre>
-<p>Live Rates Feeds uses SSL encryption and username &amp; password credentials to allow access to the API.</p>
+<p>Live Rates Feeds uses SSL encryption along with username &amp; password credentials to allow access to the API.</p>
 
 <p>The SSL certificate will be given by us.
 Username &amp; password will be generated automatically for you once you open an account.</p>
@@ -303,8 +301,8 @@ Username &amp; password will be generated automatically for you once you open an
 <p>As for the moment, Live Rates Feeds supports the following FIX messages only.</p>
 
 <aside class="notice">
-  Some of the messages will response with other FIX messages.
-  Please notice the <i>response</i> part in each message to understand the response values.
+Some of the messages will respond with other FIX messages.
+Please notice the <i>response</i> part in each message to understand the response values.
 </aside>
 
 <aside class="notice">
@@ -322,12 +320,12 @@ Username &amp; password will be generated automatically for you once you open an
 <blockquote>
 <p>To connect use this code:</p>
 </blockquote>
-<pre class="highlight java tab-java"><code><span class="kd">final</span> <span class="n">Message</span> <span class="n">customLogonMsg</span> <span class="o">=</span> <span class="n">Message</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">MsgType</span><span class="o">.</span><span class="na">Logon</span><span class="o">,</span> <span class="n">Version</span><span class="o">.</span><span class="na">FIX44</span><span class="o">);</span> 
+<pre class="highlight java tab-java"><code><span class="kd">final</span> <span class="n">Message</span> <span class="n">customLogonMsg</span> <span class="o">=</span> <span class="n">Message</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">MsgType</span><span class="o">.</span><span class="na">Logon</span><span class="o">,</span> <span class="n">Version</span><span class="o">.</span><span class="na">FIX44</span><span class="o">);</span>
 <span class="n">customLogonMsg</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">Tag</span><span class="o">.</span><span class="na">Username</span><span class="o">,</span> <span class="o">&lt;</span><span class="n">Your</span> <span class="n">username</span><span class="o">&gt;);</span>
-<span class="n">customLogonMsg</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">Tag</span><span class="o">.</span><span class="na">Password</span><span class="o">,</span> <span class="o">&lt;</span><span class="n">Your</span> <span class="n">password</span><span class="o">&gt;);</span> 
+<span class="n">customLogonMsg</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">Tag</span><span class="o">.</span><span class="na">Password</span><span class="o">,</span> <span class="o">&lt;</span><span class="n">Your</span> <span class="n">password</span><span class="o">&gt;);</span>
 <span class="n">initiator</span><span class="o">.</span><span class="na">logonAsInitiator</span><span class="o">(&lt;</span><span class="n">LRF</span> <span class="n">host</span><span class="o">&gt;,</span> <span class="o">&lt;</span><span class="n">LRF</span> <span class="n">port</span><span class="o">&gt;,</span> <span class="o">&lt;</span><span class="n">HeartBtInt</span><span class="o">&gt;,</span> <span class="n">customLogonMsg</span><span class="o">);</span>
 </code></pre>
-<p>Use this message to Logon to Live Rates Feeds market. </p>
+<p>Use this message to Logon to Live Rates Feeds market.</p>
 
 <h3 id="message-request-tags">Message request Tags:</h3>
 
@@ -371,7 +369,7 @@ Username &amp; password will be generated automatically for you once you open an
 </tbody></table>
 
 <aside class="success">
-  A connection established message wil be sent back uppon a successful connection.
+  A connection established message will be sent back upon a successful connection.
 </aside>
 
 <h2 id="new-order-single-d">New Order Single(==D)</h2>
@@ -456,7 +454,7 @@ Username &amp; password will be generated automatically for you once you open an
 <h3 id="message-response-tags">Message response tags:</h3>
 
 <aside class="success">
-  Remember - on success, an Execution Report(8) is being responed.
+  Remember - on success, the response will be an Execution Report(8).
 </aside>
 
 <table><thead>
@@ -607,7 +605,7 @@ Username &amp; password will be generated automatically for you once you open an
 <h3 id="message-response-tags">Message response tags:</h3>
 
 <aside class="success">
-  Remember - on success, an Execution Report(8) is being responed.
+  Remember - on success, the response will be an Execution Report(8).
 </aside>
 
 <table><thead>
@@ -766,7 +764,7 @@ Username &amp; password will be generated automatically for you once you open an
 <h3 id="message-response-tags">Message response tags:</h3>
 
 <aside class="success">
-  Remember - on success, an Execution Report(8) is being responed.
+  Remember - on success, the response will be an Execution Report(8).
 </aside>
 
 <table><thead>
@@ -863,7 +861,7 @@ Username &amp; password will be generated automatically for you once you open an
 <p>Use this message to request the current prices of a security</p>
 
 <aside class="notice">
-  This request uses FIX group of Symbol(55) to to support multiple security quote requests in one message.
+  This request uses FIX group of Symbol(55) to support multiple security quote requests in one message.
 </aside>
 
 <h3 id="message-request-tags">Message request tags:</h3>
@@ -903,7 +901,7 @@ Username &amp; password will be generated automatically for you once you open an
 <h3 id="message-response-tags">Message response tags:</h3>
 
 <aside class="notice">
-  On success, a QuoteResponse(AJ) will be sent back for each symol in the request
+  On success, a QuoteResponse(AJ) will be sent back for each symbol in the request
 </aside>
 
 <table><thead>
@@ -943,7 +941,7 @@ Username &amp; password will be generated automatically for you once you open an
 <h2 id="reject-3">Reject(3)</h2>
 
 <aside class="notice">
-  We use this message to response to FIX messages and wee are not supporting requests with this message.
+  We use this message to respond to FIX messages.  We are not supporting requests with this message.
 </aside>
 
 <p>on failure, we will response a failure reason within this message.</p>

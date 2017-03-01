@@ -295,7 +295,7 @@ Name | Number | Values | Meaning
 **QuoteReqID** | 131 | | ID of request
 **Symbol** | 55 | | symbol of request
 **BidPx** | 132 | | bid price of symbol
-**OfferPx | 133 | | offer price of symbol
+**OfferPx** | 133 | | offer price of symbol
 
 ## Reject(3)
 
